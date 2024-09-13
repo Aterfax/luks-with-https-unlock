@@ -155,3 +155,9 @@ Digests:
         Digest:     a8 d3 8a 3a 5c 98 7e 5e 42 9c 14 82 d7 92 4e 4c 
                     0b 8a 93 bd 55 f1 3f 02 80 77 cf f2 35 66 6d 57
 ```
+
+## Warning and disclaimer
+
+Directly pilfered from the original blog post:
+
+>The above commands modify the initramfs and errors could result in a system that does not boot. Although the commands do not delete your data it may be time consuming to restore access using a rescue image. If you have never updated initramfs from a chroot when booted from a rescue image then I suggested you try that first. And... make sure that you have backups of all your data.
