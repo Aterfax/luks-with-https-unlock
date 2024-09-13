@@ -70,7 +70,7 @@ The installer script will automatically install the pre-reqs via invoking the ``
     # How to conduct an automated installation:
     #
     # If you know the device you need to target, e.g. "/dev/sda3" you can elect to fully 
-    # automate the installation via supplying the device as an argument and and existing
+    # automate the installation via supplying the device as an argument and an existing
     # LUKS passphrase as a shell environment variable 'LUKSPASSWORD'
     #
     # Note that exporting is mandatory to make this available to subshells invoked in the install script.
