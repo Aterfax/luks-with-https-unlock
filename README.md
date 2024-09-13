@@ -64,7 +64,7 @@ The installer script will automatically install the pre-reqs via invoking the ``
 
     cd /tmp
     git clone git@github.com:Aterfax/luks-with-https-unlock.git
-    cd luks-web-decryption
+    cd luks-with-https-unlock/
     bin/install.sh
 
     # How to conduct an automated installation:
@@ -79,6 +79,9 @@ The installer script will automatically install the pre-reqs via invoking the ``
     #
     # Note: you should reboot promptly or "unset LUKSPASSWORD" after installation completes to decrease the risk of password leakage.
 
+    cd /tmp
+    git clone git@github.com:Aterfax/luks-with-https-unlock.git
+    cd luks-with-https-unlock/
     read -sp "Enter the LUKS password: " LUKSPASSWORD && export LUKSPASSWORD
     bin/install.sh "/dev/sda3" 
 
