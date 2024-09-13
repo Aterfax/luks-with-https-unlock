@@ -38,7 +38,7 @@ And example of one of these scripts can be seen here: [bin/luksunlockhttps-examp
 
 These additional hook scripts can be seen in [etc/initramfs-tools/hooks](etc/initramfs-tools/hooks).
 
-I also removed the following section from the curl hook as I require local DNS resolution to poll an LAN based web server:
+I also removed the following section from the curl hook as I require local DNS resolution to poll a LAN based web server:
 
 ```bash
 # fix DNS resolver (needed for Debian 11 + 12)
