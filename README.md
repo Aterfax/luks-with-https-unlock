@@ -89,7 +89,7 @@ You can then copy your keys to your chosen endpoint, for example with rsync:
 
     rsync /tmp/lukskeys/*.lek.enc youruser@mybastionhost.domain.com:/var/www/html/
 
-Note: The keys are expected to be provided at the root of the URL, e.g. ``https://mydomain.com/31e0d908-70a5-11ef-ad2e-76ac3383469b.lek.enc``
+Note: The keys are expected to be provided at the root of the URL, e.g. ``https://mybastionhost.domain.com/31e0d908-70a5-11ef-ad2e-76ac3383469b.lek.enc``
 
 ## Optional: Check for your LUKS device and that it has keyslots available
 
