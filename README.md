@@ -6,7 +6,7 @@ Based off the great work here: [LUKS with HTTPS unlock](https://tqdev.com/2023-l
 
 I wanted to extend this original work to also:
 
-- Store the encryption keys on the webserver in an encrypted format so the webserver owner does not have your keys.
+- Store the encryption keys on the webserver in an encrypted format so the webserver owner does not have your plaintext keys.
 - Automate the installation of this methodology onto various Ubuntu and Debian alike OSes.
 
 Like the original post, this is likely only valid for Ubuntu or Debian based OSes and I highly recommend taking backups of your new encryption key if you plan on removing your originial LUKS decryption method.
