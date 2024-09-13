@@ -63,7 +63,7 @@ The installer script will automatically install the pre-reqs via invoking the ``
     # How to conduct a manual, user prompting installation
 
     cd /tmp
-    git clone git@github.com:Aterfax/luks-with-https-unlock.git
+    git clone https://github.com/Aterfax/luks-with-https-unlock.git
     cd luks-with-https-unlock/
     bin/install.sh
 
@@ -80,7 +80,7 @@ The installer script will automatically install the pre-reqs via invoking the ``
     # Note: you should reboot promptly or "unset LUKSPASSWORD" after installation completes to decrease the risk of password leakage.
 
     cd /tmp
-    git clone git@github.com:Aterfax/luks-with-https-unlock.git
+    git clone https://github.com/Aterfax/luks-with-https-unlock.git
     cd luks-with-https-unlock/
     read -sp "Enter the LUKS password: " LUKSPASSWORD && export LUKSPASSWORD
     bin/install.sh "/dev/sda3" 
