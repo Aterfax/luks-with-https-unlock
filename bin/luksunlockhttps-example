@@ -1,0 +1,40 @@
+#!/bin/sh -e
+# Wait 10 seconds for DHCP (needed for Debian 11+12)
+if [ $CRYPTTAB_TRIED -eq "0" ]; then
+  sleep 10
+fi
+
+# Password for encrypting/decrypting the LUKS key.
+# You can generate one with: pwgen -Bcnsy 256 -1 | tr -dc 'A-Za-z0-9-_@#$%^&*()'
+DECRYPT_PASSWORD='bzgP#3nycPuv&Cy-Auv(%o3EKm7^-H@eTTd(LJusr#Jo&Eg@C_q#UfMyHc-h*4E(ebRqsUJJUbwLNhEJtksH_XejeYoK*PyVvyYr@j^ihk_d9f(Ah)$aerbddqzHeR-zu@nyW^oc$vTvk#nx%(xJ&rfq$#ze7C4Vh(yFbPYpNb4bs$Cj3jM7n-Cr@Tro$get_dtvj'
+
+# Ensure you store the encrypted LUKS key ${UUID}.lek.enc on the webserver of your choice, ensuring the machine has access to this endpoint.
+# Set the following variables
+UUID='63a2601a-6fec-11ef-809d-8f6c41627be8'
+WEBSERVERURL='https://mybastion.mydomain.com'
+ENCKEYFILENAME="${UUID}.lek.enc"
+# Command to create and encrypt the .lek file to .lek.enc
+# UUID=$(uuid) ; dd if=/dev/urandom bs=1 count=256 > "${UUID}.lek" ; openssl enc -aes-256-cbc -pbkdf2 -salt -in "${UUID}.lek" -out "${UUID}.lek.enc"
+
+# Ensure permissions are as limited as possible up front via chmod.
+touch /run/luks.key.enc
+chmod 700 /run/luks.key.enc
+
+# The script when invoked will download the encrypted LUKS key as below within the if statement, though if it fails to curl, we drop to asking for password.
+if curl -fsS --retry-connrefused --retry 5 ${WEBSERVERURL}/${ENCKEYFILENAME} -o /run/luks.key.enc; then
+  # Decrypt the LUKS key and store it in a temporary file - note that we use a file because we KNOW null bytes will cause issues if using bash variables to store them.
+  # We will however, ensure permissions are as limited as possible up front via chmod.
+  touch /run/luks.key
+  chmod 700 /run/luks.key
+  openssl enc -d -aes-256-cbc -pbkdf2 -in /run/luks.key.enc -out /run/luks.key -pass pass:"${DECRYPT_PASSWORD}" >/dev/null 2>&1
+
+  # Echo the decrypted key so the boot process can grab it to decrypt the boot disk.
+  cat /run/luks.key
+
+  # Clean up
+  rm /run/luks.key /run/luks.key.enc
+  exit
+fi
+
+# If the webserver does not answer or the curl command fails we can manually decrypt at the following prompt.
+/lib/cryptsetup/askpass "Enter password and press ENTER: "
