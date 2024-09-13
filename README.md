@@ -1,4 +1,4 @@
-# Automatic decryption for LUKS encrypted disks via webserver storage of encrypted LUKS keys
+# Automatic decryption for LUKS encrypted root disks via webserver storage of encrypted LUKS keys
 
 ## Summary
 
